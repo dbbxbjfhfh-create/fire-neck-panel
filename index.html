@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIM CỔ - FIRE</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .container {
+    max-width: 320px;
+    width: 100%;
+    text-align: center;
+  }
+  h1 {
+    color: #ff4444;
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-shadow: 0 0 15px rgba(255,0,0,0.5);
+  }
+  .btn {
+    width: 100%;
+    padding: 22px;
+    font-size: 22px;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    margin: 10px 0;
+    transition: all 0.3s;
+  }
+  .btn-off {
+    background: #cc0000;
+    color: #fff;
+    box-shadow: 0 0 25px rgba(255,0,0,0.7);
+  }
+  .btn-on {
+    background: #00cc00;
+    color: #000;
+    box-shadow: 0 0 35px rgba(0,255,0,0.9);
+  }
+  .status {
+    font-size: 18px;
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: bold;
+  }
+  .status-off {
+    background: #1a1a1a;
+    color: #ff4444;
+    border: 2px solid #ff4444;
+  }
+  .status-on {
+    background: #001a00;
+    color: #00ff00;
+    border: 2px solid #00ff00;
+  }
+  .info {
+    font-size: 13px;
+    color: #888;
+    margin-top: 25px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🎯 AIM CỔ 🎯</h1>
+  <button id="aimBtn" class="btn btn-off" onclick="toggleAim()">🔴 BẬT AIM CỔ</button>
+  <div id="status" class="status status-off">● ĐÃ TẮT</div>
+  <div class="info">
+    <p>Nhấn nút BẬT trước khi vào game</p>
+    <p>Sau đó mở Free Fire và vào trận đấu</p>
+    <p>Tâm sẽ tự động hút vào CỔ kẻ địch</p>
+  </div>
+</div>
+
+<script>
+  var isActive = false;
+
+  function toggleAim() {
+    isActive = !isActive;
+    var btn = document.getElementById('aimBtn');
+    var status = document.getElementById('status');
+
+    if (isActive) {
+      btn.className = 'btn btn-on';
+      btn.innerHTML = '🟢 TẮT AIM CỔ';
+      status.className = 'status status-on';
+      status.innerHTML = '● ĐANG BẬT - AIM CỔ HOẠT ĐỘNG';
+      localStorage.setItem('fire_neck_aim', 'true');
+    } else {
+      btn.className = 'btn btn-off';
+      btn.innerHTML = '🔴 BẬT AIM CỔ';
+      status.className = 'status status-off';
+      status.innerHTML = '● ĐÃ TẮT';
+      localStorage.setItem('fire_neck_aim', 'false');
+    }
+  }
+
+  // Kiểm tra trạng thái đã lưu
+  window.onload = function() {
+    var saved = localStorage.getItem('fire_neck_aim');
+    if (saved === 'true') {
+      toggleAim();
+    }
+  };
+</script>
+</body>
+</html>
